@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Koa = require('koa');
 const Router = require('koa-router');
 const cors = require('@koa/cors');
@@ -33,4 +35,4 @@ app
   .use(router.allowedMethods());
 
 
-app.listen(3005);
+app.listen(process.PORT);
