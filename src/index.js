@@ -1,9 +1,11 @@
 const Koa = require('koa');
+const Router = require('koa-router');
 const cors = require('@koa/cors');
-
-const tableTennis = require('./tableTennis');
+const repository = require('./repository');
 
 const app = new Koa();
+const router = new Router();
+
 
 // Cors
 const options = {
@@ -12,11 +14,23 @@ const options = {
 
 app.use(cors(options));
 
-// response
-app.use(async (ctx, next) => {
-  const result = await tableTennis.getRankedParticipants();
-  ctx.body = JSON.stringify(result);
-  await next();
+router.get('/price', async (ctx) => {
+  const {
+    date,
+  } = ctx.query;
+
+  const currentPrice = await repository.fetchPriceOnDate(date);
+  ctx.body = JSON.stringify(currentPrice);
 });
 
-app.listen(3000);
+router.get('/currentPrice', async (ctx) => {
+  const currentPrice = await repository.fetchCurrentPrice();
+  ctx.body = JSON.stringify(currentPrice);
+});
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+
+app.listen(3005);
