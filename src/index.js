@@ -11,7 +11,9 @@ const router = new Router();
 
 // Cors
 const options = {
-  origin: '*'
+  origin: [
+    /\.bitcoinregret\.net$/,
+  ],
 };
 
 app.use(cors(options));
