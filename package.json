@@ -22,7 +22,7 @@
     "dotenv": "^8.0.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pm2": "^3.5.1",
     "prettier": "^1.18.0"
   },
